@@ -3,6 +3,9 @@ ga
 A Generic implementatin of Genetic Algorithms. So far only one strategy for 
 each Genetic operatr is implemented. Feel fre to contribute if you need more.
 
+Performance is compromised by the fact of generifing aptitude and average aptitude 
+values instead of assuming primitive float.
+
 You need to implement: 
 ```java
   Individual // In the example, Team
