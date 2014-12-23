@@ -7,7 +7,9 @@
 package juanmf.geneticoperators.implementation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +38,7 @@ public class BasicSusSelector <I extends Individual, A extends AptitudeMeter<I, 
     private final AptitudeMeter<I, V, C> aptitudeMeter;
     private static final float ELITE_PROPORTION = 0.05f;
 
-    public BasicSusSelector(int offsprings, AptitudeMeter<I, V, C> aptitudeMeter) {
+    public BasicSusSelector(AptitudeMeter<I, V, C> aptitudeMeter) {
         this.aptitudeMeter = aptitudeMeter;
     }
     
@@ -59,15 +61,20 @@ public class BasicSusSelector <I extends Individual, A extends AptitudeMeter<I, 
     }
     
     /**
+     * Sorts the population & Marks the ELITE_PROPORTION Individuals as Elite.
+     * 
+     * Note that the population remains sorted.
      * 
      * @param population
      * @return 
      */
     private V markElite(Population<I, A, C, V> population) {
-        Collections.sort(population);
-        Collections.reverse(population);
-        int elite = (int) (population.size() * ELITE_PROPORTION);
-        Iterator<I> eliteIt = population.iterator();
+        List<I> individuals = new ArrayList();
+        individuals.addAll(population);
+        Collections.sort(individuals);
+        Collections.reverse(individuals);
+        int elite = (int) (individuals.size() * ELITE_PROPORTION);
+        Iterator<I> eliteIt = individuals.iterator();
         for (int i = 0; i < elite; i++) {
             eliteIt.next().setElite(true);
         }

@@ -44,7 +44,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
     public List<I> crossOver(I mom, I dad) {
         if (mom.equals(dad)) {
             // TODO: take care of convergence.
-            return Arrays.asList(mom, dad);
+            return Arrays.asList(mom);
         }
         int size = mom.size();
         Iterator<G> parent1It = mom.iterator();
