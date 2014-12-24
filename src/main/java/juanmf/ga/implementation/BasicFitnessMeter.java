@@ -8,7 +8,6 @@ package juanmf.ga.implementation;
 
 import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.structure.Individual;
-import juanmf.grandt.chromosome.Team;
 
 /**
  * You can subclass this AptitudeMeter and get a basic implementation of the
