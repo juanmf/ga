@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga.operators;
 
 import juanmf.ga.structure.Individual;
@@ -11,7 +5,11 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- *
+ * Implementors of this Interface should be able to mutate genes of given individuals.
+ * 
+ * You will need access to the genes field in order to get a random one, either 
+ * through constructor injection or Individual implementation's accessor.
+ * 
  * @author juan.fernandez
  */
 public interface Mutator<I extends Individual> {

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga.structure;
 
 import java.util.Collection;
@@ -11,22 +5,28 @@ import java.util.Map;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Instances of Individual should be final and inmutable.
+ * An individual must be a possible solution to the given problem, an element in 
+ * a Population.
+ * 
+ * Its structure is open, and must be defined after de problem. But it must be able
+ * to iterate over its genes, in order to recombine with a neighbour. Though Structure
+ * is limited to a multidimensional Map. e.g. <pre> Map<Ob, Map<Ob2, ...>> </pre>
+ * 
+ * Instances of Individual should be final and inmutable, so they can be freely 
+ * shared.
  * 
  * @param <V> The type of object that describes the aptitude.
  * @param <E> The Type of object that describes a valid key in the (multidimensional)
  * Map of Genes.
- * @param <J> The Type of object that's used by a Gen's value<J>
  * @param <T> A SubType of Type Gen
  * @param <I> A SubType of Individual used by {@link Comparable.CompareTo()}
  * 
  * @author juan.fernandez
  */
-public interface Individual <V extends Comparable<? super V>, E, J, T extends Gen<J>, 
+public interface Individual <V extends Comparable<? super V>, E, T extends Gen, 
         I extends Individual> extends Comparable<I>, Iterable<T> {
-    
     /**
-     * Retuns this individual's aptitude or fitness value. which must be a final
+     * Returns this individual's aptitude or fitness value. which must be a final
      * value initialized in constructor.
      * 
      * @return 
@@ -49,8 +49,15 @@ public interface Individual <V extends Comparable<? super V>, E, J, T extends Ge
      * 
      * @return 
      */
-    boolean isElite();
     void setElite(boolean isElite);
+    
+    /**
+     * Returns the Elite value, if it was marked by Selector, Crosser should unmark
+     * it when passing it to the next generation.
+     * 
+     * @return 
+     */
+    boolean isElite();
     
     /**
      * Returns a specific gen.  
@@ -58,7 +65,7 @@ public interface Individual <V extends Comparable<? super V>, E, J, T extends Ge
      * @param genPositionKeys
      * @return 
      */
-    Gen<J> getGen(Collection<E> genPositionKeys);
+    Gen getGen(Collection<E> genPositionKeys);
     
     /**
      * Returns the number of Genes in this individual. 

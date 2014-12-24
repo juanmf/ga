@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga.implementation;
 
 import java.util.ArrayList;
@@ -12,7 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import juanmf.ga.fitness.AptitudeMeter;
+import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.Population;
 
@@ -24,7 +18,7 @@ import juanmf.ga.structure.Population;
  *
  * @author juan.fernandez
  */
-public class BasicPopulation <I extends Individual, A extends AptitudeMeter<I, V, C>, 
+public class BasicPopulation <I extends Individual, A extends FitnessMeter<I, V, C>, 
         C extends Comparable<? super C>, V extends Comparable<? super V>> 
         implements Population<I, A, C, V> {
 
@@ -38,13 +32,13 @@ public class BasicPopulation <I extends Individual, A extends AptitudeMeter<I, V
      */
     private C averageAptitude;
 
-    public static <I extends Individual, A extends AptitudeMeter<I, V, C>, 
+    public static <I extends Individual, A extends FitnessMeter<I, V, C>, 
             C extends Comparable<? super C>, V extends Comparable<? super V>> 
             Population<I, A, C, V> createPopulation(A aptitudMeter) {
         return new BasicPopulation(aptitudMeter);
     }
 
-    public static <I extends Individual, A extends AptitudeMeter<I, V, C>, 
+    public static <I extends Individual, A extends FitnessMeter<I, V, C>, 
             C extends Comparable<? super C>, V extends Comparable<? super V>> 
             Population<I, A, C, V> createPopulation(A aptitudMeter, List<I> individuals) {
         return new BasicPopulation(aptitudMeter, individuals);
@@ -59,7 +53,7 @@ public class BasicPopulation <I extends Individual, A extends AptitudeMeter<I, V
         this.aptitudMeter = aptitudMeter;
         averageAptitude = individuals.isEmpty()
                 ? aptitudMeter.getInitialAverage() 
-                : aptitudMeter.getAverageAptitude(this);
+                : aptitudMeter.getAverageFitness(this);
     }
     
     @Override
@@ -102,21 +96,21 @@ public class BasicPopulation <I extends Individual, A extends AptitudeMeter<I, V
     }
     
     private void updateBestIndividualOnRemove(Collection<? extends I> c) {
-        averageAptitude = aptitudMeter.getAverageAptitude(individuals);
+        averageAptitude = aptitudMeter.getAverageFitness(individuals);
         if (c.contains(bestIndividual)) {
             bestIndividual = null;
         }
     }
     
     private void updateBestIndividualOnRetain(Collection<? extends I> c) {
-        averageAptitude = aptitudMeter.getAverageAptitude(individuals);
+        averageAptitude = aptitudMeter.getAverageFitness(individuals);
         if (! c.contains(bestIndividual)) {
             bestIndividual = null;
         }
     }
 
     private void updateBestIndividualOnAdd(Collection<? extends I> c) {
-        averageAptitude = aptitudMeter.getAverageAptitude(individuals);
+        averageAptitude = aptitudMeter.getAverageFitness(individuals);
         if (null != bestIndividual) {
             I bestOfC = getBestOfList(c);
             if (0 < bestOfC.compareTo(bestIndividual)) {

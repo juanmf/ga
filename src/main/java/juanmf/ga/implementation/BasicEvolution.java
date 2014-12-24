@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
-import juanmf.ga.fitness.AptitudeMeter;
+import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.operators.Crosser;
 import juanmf.ga.operators.Evolution;
 import juanmf.ga.structure.Gen;
@@ -28,7 +22,7 @@ import juanmf.ga.operators.Selector;
  *
  * @author juan.fernandez
  */
-public class BasicEvolution <I extends Individual, A extends AptitudeMeter<I, V, C>, 
+public class BasicEvolution <I extends Individual, A extends FitnessMeter<I, V, C>, 
         C extends Comparable<? super C>, V extends Comparable<? super V>,
         G extends Gen> implements Evolution<I, A, C, V, G> {
     private static final int POPULATION_DEFAULT_NUMBER = 10000;

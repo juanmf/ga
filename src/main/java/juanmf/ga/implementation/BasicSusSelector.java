@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga.implementation;
 
 import java.util.ArrayList;
@@ -16,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
-import juanmf.ga.fitness.AptitudeMeter;
+import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.Population;
 import juanmf.ga.operators.Selector;
@@ -31,14 +25,14 @@ import juanmf.ga.operators.Selector;
  *
  * @author juan.fernandez
  */
-public class BasicSusSelector <I extends Individual, A extends AptitudeMeter<I, V, C>, 
+public class BasicSusSelector <I extends Individual, A extends FitnessMeter<I, V, C>, 
         C extends Comparable<? super C>, V extends Comparable<? super V>> 
         implements Selector<I, A, C, V> {
 
-    private final AptitudeMeter<I, V, C> aptitudeMeter;
-    private static final float ELITE_PROPORTION = 0.05f;
+    private final FitnessMeter<I, V, C> aptitudeMeter;
+    private static final float ELITE_PROPORTION = 0.005f;
 
-    public BasicSusSelector(AptitudeMeter<I, V, C> aptitudeMeter) {
+    public BasicSusSelector(FitnessMeter<I, V, C> aptitudeMeter) {
         this.aptitudeMeter = aptitudeMeter;
     }
     
@@ -82,7 +76,7 @@ public class BasicSusSelector <I extends Individual, A extends AptitudeMeter<I, 
     }
     
     private NavigableMap<V, I> makeSusRoullete(Population<I, A, C, V> population) {
-        V sum = aptitudeMeter.getZeroAptitude();
+        V sum = aptitudeMeter.getZeroFitness();
         NavigableMap<V, I> susRoullete = new TreeMap<>();
         for (I i : population) {
             sum = aptitudeMeter.getSum(sum, (V) i.getAptitude());

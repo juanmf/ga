@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga.structure;
 
 import java.io.Serializable;
 
 /**
- *
+ * Marker interface used by GA operators, representing an interchangeable gen in
+ * an Individual.
+ * 
+ * This is the type through which an Individual iterates
+ * 
  * @author juan.fernandez
  */
-public interface Gen<E> extends Serializable {
-    public E getValue();
+public interface Gen {
 }

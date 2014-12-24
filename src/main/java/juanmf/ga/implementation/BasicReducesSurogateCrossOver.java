@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga.implementation;
 
 import java.util.ArrayList;
@@ -14,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
-import juanmf.ga.fitness.AptitudeMeter;
+import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.operators.Crosser;
 import juanmf.ga.structure.Gen;
 import juanmf.ga.structure.Individual;
@@ -44,7 +38,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
     public List<I> crossOver(I mom, I dad) {
         if (mom.equals(dad)) {
             // TODO: take care of convergence.
-            return Arrays.asList(mom);
+            return Collections.emptyList();
         }
         int size = mom.size();
         Iterator<G> parent1It = mom.iterator();
@@ -78,9 +72,10 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
     }
 
     @Override
-    public List<I> crossOver(Collection<I> individualsToRecombine, int populationNumber) {
+    public List<I> crossOver(List<I> individualsToRecombine, int populationNumber) {
         // TODO: limited to even populations. If you don't want the las Individual to be lost.
         List<I> offsprings = new ArrayList<>();
+        Collections.shuffle(individualsToRecombine);
         Iterator<I> it = individualsToRecombine.iterator();
         while (populationNumber >= 0) {
             I mom = null; 
