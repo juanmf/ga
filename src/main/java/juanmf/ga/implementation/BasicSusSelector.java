@@ -39,7 +39,7 @@ public class BasicSusSelector <I extends Individual, A extends FitnessMeter<I, V
     @Override
     public List<I> makeSelection(Population<I, A, C, V> population) {
         List<I> selection = new ArrayList<>();
-        NavigableMap<V, I> susRoullete = makeSusRoullete(population);
+        Map<V, I> susRoullete = makeSusRoullete(population);
         Iterator<Map.Entry<V, I>> susIterator = susRoullete.entrySet().iterator();
         V offspringAptDelta = (V) markElite(population);
         V deltaAcum = offspringAptDelta;
@@ -63,19 +63,26 @@ public class BasicSusSelector <I extends Individual, A extends FitnessMeter<I, V
      * @return 
      */
     private V markElite(Population<I, A, C, V> population) {
-        List<I> individuals = new ArrayList();
-        individuals.addAll(population);
-        Collections.sort(individuals);
-        Collections.reverse(individuals);
-        int elite = (int) (individuals.size() * ELITE_PROPORTION);
-        Iterator<I> eliteIt = individuals.iterator();
+        Collections.sort(population);
+        Collections.reverse(population);
+        int elite = (int) (population.size() * ELITE_PROPORTION);
+        Iterator<I> eliteIt = population.iterator();
         for (int i = 0; i < elite; i++) {
             eliteIt.next().setElite(true);
         }
         return (V) eliteIt.next().getAptitude();
     }
     
-    private NavigableMap<V, I> makeSusRoullete(Population<I, A, C, V> population) {
+    /**
+     * Arranges the population in a map, which keys are the accumulated sum of 
+     * all already allocated individual's fitness value.
+     * 
+     * @param population The current population to select individuals among.
+     * 
+     * @return a Map implementation that must keep input order of its keys, containing
+     * the population indexed by the fitness accumulated sum.
+     */
+    private Map<V, I> makeSusRoullete(Population<I, A, C, V> population) {
         V sum = aptitudeMeter.getZeroFitness();
         NavigableMap<V, I> susRoullete = new TreeMap<>();
         for (I i : population) {

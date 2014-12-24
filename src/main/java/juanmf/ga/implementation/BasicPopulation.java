@@ -11,6 +11,9 @@ import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.Population;
 
 /**
+ * A basic implementation of Population, that keeps track of average fitness and 
+ * best individual.
+ * 
  * @param <I> A SubType of Individual.
  * @param <A> A Subtype of AptitudeMeter.
  * @param <C> A representation of an average Aptitude with a natural Order.

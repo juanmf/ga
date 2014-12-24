@@ -9,7 +9,12 @@ import juanmf.ga.structure.IndividualFactory;
 import juanmf.ga.operators.Mutator;
 
 /**
- *
+ * Implements Mutator splitting mutation probability in two, population and 
+ * individual. To prevent iterating when the population wont receive mutation.
+ * 
+ * Then, on average, one in ten population will mutate an individual for each 1000
+ * individuals. that gives a combines prob of one each ten thousand individuals.
+ * 
  * @author juan.fernandez
  */
 public class BasicMutator <I extends Individual, G extends Gen> implements Mutator<I>{

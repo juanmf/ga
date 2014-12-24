@@ -15,7 +15,9 @@ import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.IndividualFactory;
 
 /**
- * reduced surrogate Implementation
+ * Reduced surrogate Implementation.
+ * 
+ * Recombines the given parents to generate offsprings, normally two offsprings.
  * 
  * @param <I> A subtype of Individual
  * 
@@ -34,10 +36,22 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
         this.individualFactory = individualFactory;
     }
     
+    /**
+     * Recombines two individuals using variable (random) crosspoint, but trying 
+     * to ensure that genes chain differ, a chain too short might be equal in both.
+     * 
+     * @param mom An individual to recombine.
+     * @param dad An individual to recombine.
+     * 
+     * @return an empty List if both are equal, a list with two offsprings if 
+     * everything when fine. a List with mom and dad if they could not recombine 
+     * into a viable son.
+     */
     @Override
     public List<I> crossOver(I mom, I dad) {
         if (mom.equals(dad)) {
-            // TODO: take care of convergence.
+            // take care of convergence, if both are equal return none, chances of 
+            // loosing this combination are very low.
             return Collections.emptyList();
         }
         int size = mom.size();
@@ -68,9 +82,23 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
             son2 = individualFactory.createIndividual(offspring2);
         } while ((null == son1 || null == son2) && 0 < --tries);
         // If I couldn't find viable sons return parents in inverse order.
+        // TODO: no need to return both sons or both parents, if one son could spawn.
         return (List<I>) ((null == son1 || null == son2) ? Arrays.asList(dad, mom) : Arrays.asList(son1, son2));
     }
 
+    /**
+     * Recombines the whole List of individuals.
+     * 
+     * It shuffles the List before recombining, otherwise convergence happens 
+     * too soon. It also takes care of preserving Elite and unmarking them.
+     * 
+     * @param individualsToRecombine
+     * @param populationNumber
+     * 
+     * @return The new generation of individuals, ready to form a new {@see Population}
+     * @see Individual.isElite()
+     * @see Selector
+     */
     @Override
     public List<I> crossOver(List<I> individualsToRecombine, int populationNumber) {
         // TODO: limited to even populations. If you don't want the las Individual to be lost.
@@ -103,6 +131,16 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
         return offsprings;
     }
     
+    /**
+     * Checks whether or not the individual is elite and, if so, adds it to the
+     * list that will be passed to the next generation.
+     * 
+     * @param offsprings The list of offsprings for the next generation.
+     * @param individual the individual, from current generation that might pass 
+     * through.
+     * 
+     * @return true if it was elite, false otherwise. 
+     */
     private boolean preserveElite(List<I> offsprings, I individual) {
         if (individual.isElite()) {
             offsprings.add(individual);

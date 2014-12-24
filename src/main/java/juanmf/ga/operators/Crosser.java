@@ -39,7 +39,7 @@ public interface Crosser <I extends Individual, G extends Gen> {
     List<I> crossOver(I mom, I dad);
     
     /**
-     * Recombines the whole collection of individuals.
+     * Recombines the whole List of individuals.
      * 
      * Care must be taken to keep the population to its intended number. As
      * individualsToRecombine, returned by Selector can be much less than intended 

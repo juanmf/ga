@@ -14,6 +14,9 @@ import juanmf.ga.structure.IndividualFactory;
 import juanmf.ga.operators.Selector;
 
 /**
+ * Generates successive generations of individuals asking AptitudeMeter for the
+ * ending conditions, using Genetic operators to navigate the solution field.
+ * 
  * @param <I> A SubType of Individual.
  * @param <A> A Subtype of AptitudeMeter.
  * @param <C> A representation of an average Aptitude with a natural Order.
