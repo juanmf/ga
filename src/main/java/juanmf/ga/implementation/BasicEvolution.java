@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.operators.Crosser;
-import juanmf.ga.operators.Evolution;
+import juanmf.ga.Evolution;
 import juanmf.ga.structure.Gen;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.operators.Mutator;

@@ -1,4 +1,4 @@
-package juanmf.ga.operators;
+package juanmf.ga;
 
 import juanmf.ga.structure.IndividualFactory;
 import juanmf.ga.structure.Individual;

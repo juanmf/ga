@@ -1,4 +1,4 @@
-package juanmf.ga.implementation;
+package juanmf.ga.implementation.operators;
 
 import java.util.ArrayList;
 import java.util.Arrays;

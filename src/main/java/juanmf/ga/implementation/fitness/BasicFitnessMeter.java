@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package juanmf.ga.implementation;
+package juanmf.ga.implementation.fitness;
 
 import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.structure.Individual;
