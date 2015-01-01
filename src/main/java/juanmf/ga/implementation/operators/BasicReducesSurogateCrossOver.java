@@ -52,6 +52,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
         if (mom.equals(dad)) {
             // take care of convergence, if both are equal return none, chances of 
             // loosing this combination are very low.
+            System.out.println("Crossing equal individuals, eliminating both: " + mom.hashCode());
             return Collections.emptyList();
         }
         int size = mom.size();
@@ -106,6 +107,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
         Collections.shuffle(individualsToRecombine);
         Iterator<I> it = individualsToRecombine.iterator();
         while (populationNumber >= 0) {
+            List<I> crossingResults = Collections.emptyList();
             I mom = null; 
             I dad = null;
             try {
@@ -117,8 +119,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
                 if (preserveElite(offsprings, dad)) {
                     populationNumber--;
                 }
-                preserveElite(offsprings, dad);
-                offsprings.addAll(crossOver(mom, dad));
+                offsprings.addAll(crossingResults = crossOver(mom, dad));
             } catch (NoSuchElementException e) {
                 it = individualsToRecombine.iterator();
                 if (null != mom) {
@@ -126,7 +127,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
                     offsprings.addAll(crossOver(mom, dad));
                 }
             }
-            populationNumber -= 2;
+            populationNumber -= crossingResults.size();
         }
         return offsprings;
     }

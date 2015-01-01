@@ -5,15 +5,19 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.Set;
 import java.util.TreeMap;
 import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.Population;
 import juanmf.ga.operators.Selector;
+import juanmf.grandt.chromosome.Team;
+import org.apache.commons.collections.set.ListOrderedSet;
 
 /**
  * Implements the "Stochastic universal sampling" Selection method.
@@ -65,8 +69,9 @@ public class BasicSusSelector <I extends Individual, A extends FitnessMeter<I, V
     private V markElite(Population<I, A, C, V> population) {
         Collections.sort(population);
         Collections.reverse(population);
+        Set<I> uniq = ListOrderedSet.decorate(population);
         int elite = (int) (population.size() * ELITE_PROPORTION);
-        Iterator<I> eliteIt = population.iterator();
+        Iterator<I> eliteIt = uniq.iterator();
         for (int i = 0; i < elite; i++) {
             eliteIt.next().setElite(true);
         }
