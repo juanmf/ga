@@ -123,8 +123,10 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
             } catch (NoSuchElementException e) {
                 it = individualsToRecombine.iterator();
                 if (null != mom) {
+                    // The last individual didn't find a couple, start ovre again 
+                    // and give it the 1st
                     dad = it.next();
-                    offsprings.addAll(crossOver(mom, dad));
+                    offsprings.addAll(crossingResults = crossOver(mom, dad));
                 }
             }
             populationNumber -= crossingResults.size();
