@@ -113,12 +113,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
             try {
                 mom = it.next();
                 dad = it.next();
-                if (preserveElite(offsprings, mom)) {
-                    populationNumber--;
-                }
-                if (preserveElite(offsprings, dad)) {
-                    populationNumber--;
-                }
+                populationNumber -= preserveElite(offsprings, mom, dad);
                 offsprings.addAll(crossingResults = crossOver(mom, dad));
             } catch (NoSuchElementException e) {
                 it = individualsToRecombine.iterator();
@@ -139,17 +134,23 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
      * list that will be passed to the next generation.
      * 
      * @param offsprings The list of offsprings for the next generation.
-     * @param individual the individual, from current generation that might pass 
+     * @param i1 the individual, from current generation that might pass 
      * through.
      * 
      * @return true if it was elite, false otherwise. 
      */
-    private boolean preserveElite(List<I> offsprings, I individual) {
-        if (individual.isElite()) {
-            offsprings.add(individual);
-            individual.setElite(false);
-            return true;
+    private int preserveElite(List<I> offsprings, I i1, I i2) {
+        int count = 0;
+        if (i1.isElite()) {
+            offsprings.add(i1);
+            i1.setElite(false);
+            count++;
         }
-        return false;
+        if (i2.isElite()) {
+            offsprings.add(i2);
+            i2.setElite(false);
+            count++;
+        }
+        return count;
     }
 }
