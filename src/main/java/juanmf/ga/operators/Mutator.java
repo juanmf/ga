@@ -1,7 +1,6 @@
 package juanmf.ga.operators;
 
 import juanmf.ga.structure.Individual;
-import java.util.Collection;
 import java.util.List;
 
 /**

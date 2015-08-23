@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package juanmf.ga;
 
 import com.google.common.eventbus.EventBus;
@@ -31,7 +25,12 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * @param <I> A SubType of Individual.
+ * @param <A> A Subtype of AptitudeMeter.
+ * @param <C> A representation of an average Aptitude with a natural Order.
+ * @param <V> A representation of an Aptitude Value.
+ * @param <G> A Sub Type of Gen.
+ * 
  * @author juan.fernandez
  */
 @Configuration

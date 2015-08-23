@@ -14,7 +14,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import juanmf.ga.events.EvolutionFinishedEvent;
-import juanmf.ga.operators.Selector;
 import juanmf.ga.structure.Gen;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.IndividualFactory;

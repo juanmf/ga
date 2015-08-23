@@ -1,7 +1,5 @@
 package juanmf.ga.structure;
 
-import java.io.Serializable;
-
 /**
  * Marker interface used by GA operators, representing an interchangeable gen in
  * an Individual.

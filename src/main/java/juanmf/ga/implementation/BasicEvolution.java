@@ -14,9 +14,7 @@ import juanmf.ga.structure.Population;
 import juanmf.ga.structure.PopulationFactory;
 import juanmf.ga.structure.IndividualFactory;
 import juanmf.ga.operators.Selector;
-import juanmf.grandt.App;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * Generates successive generations of individuals asking AptitudeMeter for the

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import juanmf.ga.operators.Crosser;
-import juanmf.ga.operators.Selector;
 import juanmf.ga.structure.Gen;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.IndividualFactory;

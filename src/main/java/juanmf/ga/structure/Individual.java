@@ -1,8 +1,6 @@
 package juanmf.ga.structure;
 
 import java.util.Collection;
-import java.util.Map;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * An individual must be a possible solution to the given problem, an element in 

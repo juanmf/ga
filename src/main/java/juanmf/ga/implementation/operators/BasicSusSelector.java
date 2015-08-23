@@ -1,11 +1,7 @@
 package juanmf.ga.implementation.operators;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +12,6 @@ import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.Population;
 import juanmf.ga.operators.Selector;
-import juanmf.grandt.chromosome.Team;
 import org.apache.commons.collections.set.ListOrderedSet;
 
 /**

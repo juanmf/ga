@@ -1,6 +1,5 @@
 package juanmf.ga.implementation.operators;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import juanmf.ga.structure.Gen;
@@ -14,6 +13,9 @@ import juanmf.ga.operators.Mutator;
  * 
  * Then, on average, one in ten population will mutate an individual for each 1000
  * individuals. that gives a combines prob of one each ten thousand individuals.
+ * 
+ * @param <I> A subtype of Individual.
+ * @param <G> A subtype of Gen.
  * 
  * @author juan.fernandez
  */

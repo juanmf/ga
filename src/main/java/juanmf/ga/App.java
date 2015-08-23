@@ -1,14 +1,10 @@
 package juanmf.ga;
 
-import com.google.common.eventbus.EventBus;
 import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.implementation.BasicPopulation;
-import juanmf.ga.structure.Gen;
-import juanmf.ga.structure.Individual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
         
