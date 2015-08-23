@@ -1,5 +1,6 @@
 package juanmf.ga.operators;
 
+import com.google.common.eventbus.EventBus;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.Gen;
 import java.util.Collection;

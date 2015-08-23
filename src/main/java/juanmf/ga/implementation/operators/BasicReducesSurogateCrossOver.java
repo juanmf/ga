@@ -2,14 +2,13 @@ package juanmf.ga.implementation.operators;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
-import juanmf.ga.fitness.FitnessMeter;
 import juanmf.ga.operators.Crosser;
+import juanmf.ga.operators.Selector;
 import juanmf.ga.structure.Gen;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.IndividualFactory;
@@ -29,8 +28,8 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
     /**
      * Random cross point generator.
      */
-    private static final Random RANDY = new Random();
-    private final IndividualFactory individualFactory;
+    protected static final Random RANDY = new Random();
+    protected final IndividualFactory individualFactory;
 
     public BasicReducesSurogateCrossOver(IndividualFactory individualFactory) {
         this.individualFactory = individualFactory;
@@ -102,7 +101,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
      */
     @Override
     public List<I> crossOver(List<I> individualsToRecombine, int populationNumber) {
-        // TODO: limited to even populations. If you don't want the las Individual to be lost.
+        // TODO: limited to even populations. If you don't want the last Individual to be lost.
         List<I> offsprings = new ArrayList<>();
         Collections.shuffle(individualsToRecombine);
         Iterator<I> it = individualsToRecombine.iterator();
@@ -128,7 +127,7 @@ public class BasicReducesSurogateCrossOver <I extends Individual, G extends Gen>
         }
         return offsprings;
     }
-    
+
     /**
      * Checks whether or not the individual is elite and, if so, adds it to the
      * list that will be passed to the next generation.

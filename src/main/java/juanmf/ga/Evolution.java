@@ -11,7 +11,7 @@ import juanmf.ga.structure.Population;
  * ending conditions, using Genetic operators to navigate the solution field.
  * 
  * @param <I> A SubType of Individual.
- * @param <A> A Subtype of AptitudeMeter.
+ * @param <A> A Subtype of FitnessMeter.
  * @param <C> A representation of an average Aptitude with a natural Order.
  * @param <V> A representation of an Aptitude Value.
  * @param <G> A SubType of Gen.
