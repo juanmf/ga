@@ -67,3 +67,8 @@ BasicFitnessMeter
 
 It implements a default stop condition, if the best didn't improve in last 100 
 generations, it's meetStopCondition() returns true.
+
+Selection Strategy
+==================
+
+Stochastic universal sampling method is used.
