@@ -33,7 +33,6 @@ public class Config {
     
     @Bean(name="fitnessMeter")
     public FitnessMeter getFitnessMeter() {
-        System.out.println("getFitnessMeter");
         return new TeamAptitudeMeter();
     }
 }

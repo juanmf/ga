@@ -57,9 +57,9 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
     @Bean(name="concurrentcrosser")
     @Primary
     public Crosser<I, G> getConcurrentCrosser(
-            IndividualFactory individualFactory
+            EventBus eb, IndividualFactory individualFactory
     ) {
-        return new ConcurrentBasicReducesSurogateCrossOver<>(individualFactory);
+        return new ConcurrentBasicReducesSurogateCrossOver<>(eb, individualFactory);
     }
     
     @Bean(name="selector")
@@ -78,11 +78,11 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
     
     @Bean(name="evolution")
     public Evolution getEvolution(
-            Selector selector, Crosser crosser, Mutator mutator,
+            EventBus eb, Selector selector, Crosser crosser, Mutator mutator,
             IndividualFactory individualFactory, FitnessMeter aptitudeMeter,
             PopulationFactory populationFactory
     ) {
-        return new BasicEvolution(selector, crosser, mutator, individualFactory, aptitudeMeter, populationFactory);
+        return new BasicEvolution(eb, selector, crosser, mutator, individualFactory, aptitudeMeter, populationFactory);
     }
     
     
@@ -102,7 +102,6 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
             if (bean instanceof EventListener) {
                 EventBus eb = context.getBean(EventBus.class);
                 eb.register(bean);
-                System.out.println(eb);
             }
             return bean;
         }

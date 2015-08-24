@@ -14,7 +14,6 @@ import juanmf.ga.structure.Population;
 import juanmf.ga.structure.PopulationFactory;
 import juanmf.ga.structure.IndividualFactory;
 import juanmf.ga.operators.Selector;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Generates successive generations of individuals asking AptitudeMeter for the
@@ -40,19 +39,19 @@ public class BasicEvolution <I extends Individual, A extends FitnessMeter<I, V, 
     private final IndividualFactory<I, G> individualFactory;
     private final A aptitudeMeter;
     
-    @Autowired
-    EventBus eb;
+    private EventBus eb;
     
-    public BasicEvolution(Selector selector, Crosser crosser, Mutator mutator,
+    public BasicEvolution(EventBus eb, Selector selector, Crosser crosser, Mutator mutator,
             IndividualFactory<I, G> individualFactory, A aptitudeMeter,
             PopulationFactory<I, A, C, V> populationFactory) {
-        this(selector, crosser, mutator, individualFactory, aptitudeMeter, 
+        this(eb, selector, crosser, mutator, individualFactory, aptitudeMeter, 
                 populationFactory, POPULATION_DEFAULT_NUMBER);
     }
     
-    public BasicEvolution(Selector selector, Crosser crosser, Mutator mutator, 
+    public BasicEvolution(EventBus eb, Selector selector, Crosser crosser, Mutator mutator, 
             IndividualFactory<I, G> individualFactory, A aptitudeMeter, 
             PopulationFactory<I, A, C, V> populationFactory, int populationNumber) {
+        this.eb = eb;
         this.populationNumber = populationNumber;
         this.selector = selector;
         this.crosser = crosser;
@@ -80,31 +79,15 @@ public class BasicEvolution <I extends Individual, A extends FitnessMeter<I, V, 
             generation = generatePopulation(individualFactory);
         }
         int generationNumber = 1;
-        long time, selectionTime = 0, crosserTime = 0, mutationTime = 0;
         while (!(aptitudeMeter.meetStopCondition(generation.getBest()) 
                 || aptitudeMeter.meetStopCondition(generation.getBest(), generationNumber))) {
-            time = System.currentTimeMillis();
             selection = selector.makeSelection(generation);
-            time = System.currentTimeMillis() - time;
-            selectionTime += time;
-            
-            time = System.currentTimeMillis();
             selection = crosser.crossOver(selection, populationNumber);
-            time = System.currentTimeMillis() - time;
-            crosserTime += time;
-            
-            time = System.currentTimeMillis();
             mutator.mutate(selection);
-            time = System.currentTimeMillis() - time;
-            mutationTime += time;
-            
             generation = BasicPopulation.createPopulation(aptitudeMeter, selection);
             generationNumber++;
         }
         eb.post(new EvolutionFinishedEvent(generation));
-        System.out.println("Selection duration: " + selectionTime);
-        System.out.println("Mutation duration: " + mutationTime);
-        System.out.println("Crossing duration: " + crosserTime);
         return generation;
     }
 }

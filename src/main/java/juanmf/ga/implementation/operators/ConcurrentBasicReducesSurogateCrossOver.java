@@ -17,7 +17,6 @@ import juanmf.ga.events.EvolutionFinishedEvent;
 import juanmf.ga.structure.Gen;
 import juanmf.ga.structure.Individual;
 import juanmf.ga.structure.IndividualFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Reduced surrogate Implementation.
@@ -32,14 +31,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ConcurrentBasicReducesSurogateCrossOver <I extends Individual, G extends Gen> 
         extends BasicReducesSurogateCrossOver<I, G> implements EventListener {
     
-    @Autowired
     private EventBus eb;
             
     private static final int THREADS = Runtime.getRuntime().availableProcessors();
     private final ExecutorService ex;
         
-    public ConcurrentBasicReducesSurogateCrossOver(IndividualFactory individualFactory) {
+    public ConcurrentBasicReducesSurogateCrossOver(
+            EventBus eb, IndividualFactory individualFactory
+    ) {
         super(individualFactory);
+        this.eb = eb;
         ex = Executors.newFixedThreadPool(THREADS);
     }
 
