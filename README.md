@@ -15,6 +15,10 @@ To solve a given problem, you need to implement:
 Then expose individualFactory, populationFactory and fitnessMeter beans as follows.
 
 ```java
+    /**
+     * Make sure @ComponentScan("pkg") includes this class' pkg so that these beans
+     * get registered.
+     */
     @Configuration
     public class Config {
 

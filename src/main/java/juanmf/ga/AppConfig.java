@@ -51,7 +51,6 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
     public Crosser<I, G> getCrosser(
             IndividualFactory individualFactory
     ) {
-        System.out.println(method());
         return new BasicReducesSurogateCrossOver<>(individualFactory);
     }
     
@@ -60,7 +59,6 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
     public Crosser<I, G> getConcurrentCrosser(
             IndividualFactory individualFactory
     ) {
-        System.out.println(method());
         return new ConcurrentBasicReducesSurogateCrossOver<>(individualFactory);
     }
     
@@ -68,7 +66,6 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
     public Selector<I, A, C, V> getSelector(
             FitnessMeter aptitudeMeter
     ) {
-        System.out.println(method());
         return new BasicSusSelector<>(aptitudeMeter);
     }
     
@@ -76,7 +73,6 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
     public Mutator<I> getMutator(
             IndividualFactory individualFactory
     ) {
-        System.out.println(method());
         return new BasicMutator<>(individualFactory);
     }
     
@@ -86,7 +82,6 @@ public class AppConfig <I extends Individual, A extends FitnessMeter<I, V, C>,
             IndividualFactory individualFactory, FitnessMeter aptitudeMeter,
             PopulationFactory populationFactory
     ) {
-        System.out.println(method());
         return new BasicEvolution(selector, crosser, mutator, individualFactory, aptitudeMeter, populationFactory);
     }
     
