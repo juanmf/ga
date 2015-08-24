@@ -34,7 +34,6 @@ Then expose individualFactory, populationFactory and fitnessMeter beans as follo
 
         @Bean(name="fitnessMeter")
         public FitnessMeter getFitnessMeter() {
-            System.out.println("getFitnessMeter");
             return new TeamAptitudeMeter();
         }
     }
