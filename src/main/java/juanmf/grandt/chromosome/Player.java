@@ -1,6 +1,5 @@
 package juanmf.grandt.chromosome;
 
-import com.oracle.jrockit.jfr.DataType;
 import java.io.IOException;
 import java.io.StringReader;
 import java.math.BigDecimal;
@@ -33,8 +32,9 @@ public class Player implements Gen {
      * Random player List's  index generator.
      */
     private static final Random RANDY = new Random();
-    private static final String CSV_PATH = "/home/likewise-open/GLOBANT/juan.fernandez/Documents/GranDt.csv";
-    
+    private static final String CSV_PATH = 
+            Player.class.getClassLoader().getResource("GranDt.csv").getPath();
+
     /**
      * A complete map of Roles with all the players that are eligible.
      * 
