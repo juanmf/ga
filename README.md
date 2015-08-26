@@ -3,7 +3,14 @@ ga
 A Generic implementation of Genetic Algorithms. So far only one strategy for 
 each Genetic operator is implemented.
 
-To solve a given problem, you need to implement: 
+Also, an example use case is implemented so as to see the process running 
+out of the box.
+
+Customizing
+===========
+
+To solve a given problem, you need to implement a representation of it's structure 
+by implementin/subclassing the following I¿interfaces/classes: 
 ```java
   juanmf.ga.structure.Individual // In the example, Team
   juanmf.ga.structure.Gen // In the example, Player
@@ -12,6 +19,7 @@ To solve a given problem, you need to implement:
   juanmf.ga.structure.PopulationFactory // In the example, inner class of Team
 ```
 
+The example 
 Then expose individualFactory, populationFactory and fitnessMeter beans as follows.
 
 ```java
@@ -39,7 +47,12 @@ Then expose individualFactory, populationFactory and fitnessMeter beans as follo
     }
 ```
 
-Then run the project and whatch the evolution process in console.
+Then run the project 
+```
+$ mvn compile exec:java
+```
+
+And whatch the evolution process in console.
 ```
 meetStopCondition: Current Best: 1310: Historical Best: 0
 Selection individuals: 5806
