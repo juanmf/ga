@@ -1,0 +1,78 @@
+@startuml
+
+interface Evolution {
+  evolve(): Population
+  generatePopulation(): Population
+}
+
+package operators {
+  interface Crosser
+  interface Mutator
+  interface Selector
+  
+}
+
+package fitness {
+  interface FitnessMeter
+}
+
+package structure {
+  interface Gen
+  interface Individual
+  interface IndividualFactory
+  interface Population
+  interface PopulationFactory
+}
+
+package implementation {
+
+  package implementation.fitness {
+    class BasicFitnessMeter <<abstract>>
+  }
+  package implementation.operators {
+    class BasicReducesSurogateCrosser
+    class ConcurrentBasicReducesSurogateCrosser
+    class BasicMutator
+    class BasicSusSelector
+    class BasicPopulation 
+  }
+  
+  class BasicEvolution
+}
+
+package grandt { 
+  class Player
+  note right
+    A specific problem shouls implement its structure and fitnessMeter.
+  end note
+
+  class Team
+  class TeamAptitudeMeter
+  class TeamFactory
+  class TeamPopulationFactory
+  TeamFactory --+ Team
+  TeamPopulationFactory --+ Team
+}
+
+
+BasicEvolution -|> Evolution
+BasicPopulation -|> Population
+BasicReducesSurogateCrosser -|> Crosser
+ConcurrentBasicReducesSurogateCrosser -|> BasicReducesSurogateCrosser
+BasicMutator -|> Mutator
+BasicSusSelector -|> Selector
+BasicFitnessMeter -|> FitnessMeter 
+
+Player -|> Gen
+Team -|> Individual
+TeamAptitudeMeter -|> BasicFitnessMeter
+TeamFactory -|> IndividualFactory
+TeamPopulationFactory -|> PopulationFactory
+
+Evolution ..> Population
+Evolution ..> IndividualFactory
+
+
+@enduml
+
+
