@@ -43,7 +43,7 @@ package implementation {
 package grandt { 
   class Player
   note right
-    A specific problem shouls implement its structure and fitnessMeter.
+    A specific problem should implement its structure and fitnessMeter.
   end note
 
   class Team
